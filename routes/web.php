@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Livewire\Admin\CreateSecrvicesComponent;
+use App\Http\Livewire\Admin\EditSecrvicesComponent;
+use App\Http\Livewire\Admin\SecrvicesComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//    return view('dashboard');
+//})->name('dashboard');
+Route::middleware(['auth:sanctum','verified'])->group(function(){
+    Route::get('/admin/services',SecrvicesComponent::class)->name('services');
+    Route::get('/admin/create/service',CreateSecrvicesComponent::class)->name('create.service');
+    Route::get('/admin/edit/service',EditSecrvicesComponent::class)->name('edit.service');
 });
